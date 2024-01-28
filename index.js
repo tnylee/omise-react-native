@@ -151,6 +151,25 @@ class ReactNativeOmise {
             }).catch((error) => resolve(error));
         })
     }
+
+    createChargeByToken(data) {
+        const chargeEndpoint = `${apiEndpoint}charges`;
+        return new Promise((resolve, reject) => {
+            return fetch(chargeEndpoint, {
+                method: 'POST',
+                cache: 'no-cache',
+                headers: headers,
+                body: JSON.stringify(data)
+            }).then((response) => {
+                if (response.ok && response.status === 200) {
+                    resolve(response.json());
+                } else {
+                    console.log("response not ok", response);
+                    reject(response.json());
+                }
+            }).catch((error) => resolve(error));
+        });
+    }
 }
 
 
